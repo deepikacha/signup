@@ -16,17 +16,17 @@ router.post('/login', async (req, res) => {
 
         // Check if email exists
         if (!user) {
-            return res.status(404).json({ message: "Email is not correct." });
+            return res.status(404).json({ message: "User not found" });
         }
 
         // Check if password matches
         if (user.password !== password) {
-            return res.status(401).json({ message: "Password is not correct." });
+            return res.status(401).json({ message: "User not authorized" });
         }
 
         // Login successful
         res.status(200).json({
-            message: "Login successful!",
+            message: "User Login successful!",
             user: { id: user.id, email: user.email, name: user.name },
         });
     } catch (err) {
