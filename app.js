@@ -10,6 +10,14 @@ app.set('views','views')
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')))
 app.use(express.json()); 
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'signup.html'));
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
 app.use(userRoutes);
 sequelize.sync()
 .then((result)=>{
