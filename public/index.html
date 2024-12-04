@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for Appointment</title>
+</head>
+<body>
+    
+    <form id="register-form">
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" placeholder="Name" required>
+        <label for="email">Enter your email:</label>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="text" id="password" placeholder="password" required>
+        
+        <button type="submit">signup</button>
+    </form>
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (!name) {
+                alert("Please enter a user name.");
+                return; // Stop further execution if name is not provided
+            }
+        
+            if (!email) {
+                alert("Please enter an email address.");
+                return;
+            }
+        
+            if (!password) {
+                alert("Please enter a password.");
+                return;
+            }
+        
+           
+
+            const userData = { name, email, password };
+
+            fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('User registered successfully!');
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error registering user:', error);
+            });
+        });
+    </script>
+</body>
+</html>
